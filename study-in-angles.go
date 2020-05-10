@@ -1,10 +1,8 @@
 package main
 
 import (
-  "os"
-  "log"
   "image"
-  "image/png"
+  "os"
   "image/color"
   "github.com/mcwhittemore/pixicog-go"
 )
@@ -17,19 +15,15 @@ func main() {
 
   job := pixicog.NewJob(cog.Rotate(90))
   job = job.Process(func(source, state pixicog.Pixicog) pixicog.Pixicog {
-    n := len(source)
     width := source.Width()
     height := source.Height()
 
     img := image.NewRGBA(source.Bounds())
     state = append(state, img)
 
-    colors := make([]color.Color, n)
     for x := 0; x < width; x++ {
       for y := 0; y < height; y++ {
-        for i := 0; i < n; i++ {
-          colors[i] = source.GetDiminished(i, x, y, 16)
-        }
+        colors := source.GetDiminished(x,y,16)
         c := mostCommon(colors)
         img.Set(x, y, c)
       }
@@ -38,7 +32,7 @@ func main() {
     return state
   })
 
-  Save(job.GetState(), os.Args[2])
+  job.GetState().SavePNG(os.Args[2])
 }
 
 func mostCommon(colors []color.Color) color.Color {
@@ -64,18 +58,3 @@ func mostCommon(colors []color.Color) color.Color {
   return common
 }
 
-func Save(img image.Image, filename string) {
-  f, err := os.Create(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if err := png.Encode(f, img); err != nil {
-		f.Close()
-		log.Fatal(err)
-	}
-
-	if err := f.Close(); err != nil {
-		log.Fatal(err)
-	}
-}
