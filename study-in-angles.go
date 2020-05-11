@@ -8,13 +8,13 @@ import (
 )
 
 func main() {
-  cog, err := pixicog.PixicogFromVideoFileName(os.Args[1])
+  cog, err := pixicog.ImageListFromVideoFileName(os.Args[1])
   if err != nil {
     panic(1)
   }
 
   job := pixicog.NewJob(cog.Rotate(90))
-  job = job.Process(func(source, state pixicog.Pixicog) pixicog.Pixicog {
+  job = job.Process(func(source, state pixicog.ImageList) pixicog.ImageList {
     width := source.Width()
     height := source.Height()
 
