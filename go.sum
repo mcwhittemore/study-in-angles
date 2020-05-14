@@ -2,7 +2,5 @@ github.com/3d0c/gmf v0.0.0-20190724130615-f4b5acb7db5c h1:0MMmgSFC0S35+N5rZlUIuQ
 github.com/3d0c/gmf v0.0.0-20190724130615-f4b5acb7db5c/go.mod h1:0QMRcUq2JsDECeAq7bj4h79k7XbhtTsrPUQf6G7qfPs=
 github.com/BurntSushi/graphics-go v0.0.0-20160129215708-b43f31a4a966 h1:lTG4HQym5oPKjL7nGs+csTgiDna685ZXjxijkne828g=
 github.com/BurntSushi/graphics-go v0.0.0-20160129215708-b43f31a4a966/go.mod h1:Mid70uvE93zn9wgF92A/r5ixgnvX8Lh68fxp9KQBaI0=
-github.com/mcwhittemore/pixicog-go v1.0.0 h1:VXoLoeivEyD3vXZ1kYgmHMj+v1ocmPNMKcOj7ntCBo0=
-github.com/mcwhittemore/pixicog-go v1.0.0/go.mod h1:rdusW7MguTNJTC0/qiNc3PykLDgBZxXOVM/RS4JG0SA=
-github.com/mcwhittemore/pixicog-go v1.0.1 h1:/Y2yNQ3zaumi/DqnQ7PbWHq4cvMFAHtQNZ3rqIXVI5s=
-github.com/mcwhittemore/pixicog-go v1.0.1/go.mod h1:rdusW7MguTNJTC0/qiNc3PykLDgBZxXOVM/RS4JG0SA=
+github.com/mcwhittemore/pixicog v1.0.0 h1:9CulQOQGq4JUX2Kv0sxm2GviHiEMj//w9RjPiw/Olrw=
+github.com/mcwhittemore/pixicog v1.0.0/go.mod h1:cALEucZPFRtLrT/+Rjby0Q1MeTp1B+qA3nbbUC6JWC0=

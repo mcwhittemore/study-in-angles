@@ -4,35 +4,42 @@ import (
   "image"
   "os"
   "image/color"
-  "github.com/mcwhittemore/pixicog-go"
+  "github.com/mcwhittemore/pixicog"
 )
 
-func main() {
-  cog, err := pixicog.ImageListFromVideoFileName(os.Args[1])
+func ProcessLoad(src, state pixicog.ImageList) (pixicog.ImageList, pixicog.ImageList) {
+  src, err := pixicog.ImageListFromVideoFileName(os.Args[1])
   if err != nil {
-    panic(1)
+    panic(err)
   }
 
-  job := pixicog.NewJob(cog.Rotate(90))
-  job = job.Process(func(source, state pixicog.ImageList) pixicog.ImageList {
-    width := source.Width()
-    height := source.Height()
+  state = pixicog.ImageList{}
+  src = src.Rotate(90)
 
-    img := image.NewRGBA(source.Bounds())
-    state = append(state, img)
+  return src, state
+}
 
-    for x := 0; x < width; x++ {
-      for y := 0; y < height; y++ {
-        colors := source.GetDiminished(x,y,16)
-        c := mostCommon(colors)
-        img.Set(x, y, c)
-      }
+func ProcessFirstLayer(src, state pixicog.ImageList) (pixicog.ImageList, pixicog.ImageList) {
+  width := src.Width()
+  height := src.Height()
+
+  img := image.NewRGBA(src.Bounds())
+
+  for x := 0; x < width; x++ {
+    for y := 0; y < height; y++ {
+      colors := src.GetDiminished(x,y,16)
+      c := mostCommon(colors)
+      img.Set(x, y, c)
     }
+  }
 
-    return state
-  })
+  state = append(state, img)
+  return src, state
+}
 
-  job.GetState().SavePNG(os.Args[2])
+func ProcessSave(src, state pixicog.ImageList) (pixicog.ImageList, pixicog.ImageList) {
+  state.SavePNG(os.Args[2])
+  return src, state
 }
 
 func mostCommon(colors []color.Color) color.Color {
