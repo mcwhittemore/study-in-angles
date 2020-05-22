@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha1"
 	"encoding/base64"
 	"fmt"
 	"github.com/mcwhittemore/pixicog"
